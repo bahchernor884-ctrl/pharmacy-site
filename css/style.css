@@ -396,6 +396,13 @@ main {
     color: #4b5563;
 }
 
+.product-notice {
+    max-width: 700px;
+    margin: 10px auto 0;
+    color: #4b5563;
+    font-size: 0.95rem;
+}
+
 .product-search {
     max-width: 480px;
     margin: 0 auto 30px;
