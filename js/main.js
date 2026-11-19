@@ -5,7 +5,15 @@ const cartTotal = document.getElementById("cart-total");
 const cartCount = document.getElementById("cart-count");
 const cartEmptyMessage = document.getElementById("cart-empty");
 const whatsappOrderButton = document.getElementById("whatsapp-order");
-const cart = [];
+function loadCart() {
+    try {
+        return JSON.parse(localStorage.getItem("cityStarsCart")) || [];
+    } catch (error) {
+        console.error("Error loading cart from localStorage:", error);
+        return [];
+    }
+}
+let cart = loadCart();
 
 // Keep the product search working.
 if (searchBox) {
@@ -13,7 +21,8 @@ if (searchBox) {
         const searchText = searchBox.value.toLowerCase();
 
         productCards.forEach(function (card) {
-            const productDetails = card.textContent.toLowerCase();
+            const productDetails = (card.dataset.name + " " +
+                card.querySelector("p").textContent).toLowerCase();
             card.style.display = productDetails.includes(searchText) ? "" : "none";
         });
     });
@@ -22,6 +31,7 @@ if (searchBox) {
 // Add one product or increase its quantity in the cart.
 productCards.forEach(function (card) {
     const addButton = card.querySelector(".add-btn");
+    if (!addButton) return;
 
     addButton.addEventListener("click", function () {
         const productName = card.dataset.name;
@@ -36,12 +46,16 @@ productCards.forEach(function (card) {
             cart.push({ name: productName, price: productPrice, quantity: 1 });
         }
 
-        showCart();
+       showCart();
     });
 });
 
+
+
 // Draw the current cart and update its total and item count.
 function showCart() {
+     localStorage.setItem("cityStarsCart", JSON.stringify(cart));
+  cartItemsList.replaceChildren();
     cartItemsList.replaceChildren();
 
     const itemCount = cart.reduce(function (count, cartItem) {
