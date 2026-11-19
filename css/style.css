@@ -140,7 +140,7 @@ body {
     padding: 80px 8%;
     background:
         linear-gradient(90deg, rgba(6, 45, 40, 0.88), rgba(6, 45, 40, 0.32)),
-        url("../images/green-bg.jpeg") center / cover no-repeat;
+        url("../images/hero.jpeg") center / cover no-repeat;
     color: white;
 }
 
