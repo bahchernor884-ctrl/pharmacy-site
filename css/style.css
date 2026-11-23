@@ -243,6 +243,7 @@ body {
 
     .home-hero {
         min-height: 480px;
+        margin: -24px -24px 0;
         padding: 60px 7%;
         background-position: center;
     }
